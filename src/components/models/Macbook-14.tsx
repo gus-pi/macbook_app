@@ -68,7 +68,7 @@ export default function MacbookModel14(props: JSX.IntrinsicElements['group']) {
         'models/macbook-14-transformed.glb',
     ) as unknown as GLTFResult;
 
-    const { color } = useMacBookStore();
+    const color = useMacBookStore((state) => state.color);
 
     const texture = useTexture('/screen.png');
 

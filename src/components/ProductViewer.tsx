@@ -22,7 +22,7 @@ const ProductViewer = () => {
                     <div className="color-control">
                         <div
                             onClick={() => setColor('#adb5bd')}
-                            className={clsx('bg-neutral-300', color == '#adb5bd' && 'active')}
+                            className={clsx('bg-neutral-300', color === '#adb5bd' && 'active')}
                         />
                         <div
                             onClick={() => setColor('#2e2c2e')}
