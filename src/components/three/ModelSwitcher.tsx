@@ -6,7 +6,7 @@ import MacbookModel14 from '../models/Macbook-14';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
-const ANIMATION_DURATION = 1;
+const ANIMATION_DURATION = 0.8;
 const OFFSET_DISTANCE = 5;
 
 const fadeMeshes = (group: THREE.Group | null, opacity: number) => {
@@ -23,7 +23,7 @@ const fadeMeshes = (group: THREE.Group | null, opacity: number) => {
 const moveGroup = (group: THREE.Group | null, xPos: number) => {
     if (!group) return;
 
-    gsap.to(group.position, { x: xPos, duration: ANIMATION_DURATION });
+    gsap.to(group.position, { x: xPos, duration: ANIMATION_DURATION, ease: 'power2.inOut' });
 };
 
 const ModelSwitcher = ({ scale, isMobile }: { scale: number; isMobile: boolean }) => {
