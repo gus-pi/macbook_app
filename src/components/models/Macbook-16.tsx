@@ -11,7 +11,9 @@ Title: macbook pro M3 16 inch 2024
 import * as THREE from 'three';
 import { useGLTF, useTexture } from '@react-three/drei';
 import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { type JSX } from 'react';
+import { useEffect, type JSX } from 'react';
+import useMacBookStore from '../../store';
+import { noChangeParts } from '../../constants';
 
 type GLTFAction = THREE.AnimationClip;
 
@@ -62,11 +64,23 @@ type GLTFResult = GLTF & {
 };
 
 export default function MacbookModel16(props: JSX.IntrinsicElements['group']) {
-    const { nodes, materials } = useGLTF(
+    const { nodes, materials, scene } = useGLTF(
         'models/macbook-16-transformed.glb',
     ) as unknown as GLTFResult;
 
+    const { color } = useMacBookStore();
+
     const texture = useTexture('/screen.png');
+
+    useEffect(() => {
+        scene.traverse((child) => {
+            if (child instanceof THREE.Mesh) {
+                if (!noChangeParts.includes(child.name)) {
+                    child.material.color = new THREE.Color(color);
+                }
+            }
+        });
+    }, [color, scene]);
     return (
         <group {...props} dispose={null}>
             <mesh
