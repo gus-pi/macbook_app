@@ -30,9 +30,16 @@ const Showcase = () => {
     return (
         <section id="showcase">
             <div className="media">
-                <video src="/videos/game.mp4" loop muted autoPlay playsInline />
+                <video
+                    src="/videos/game.mp4"
+                    loop
+                    muted
+                    autoPlay
+                    playsInline
+                    aria-label="No Mans Sky gameplay video"
+                />
                 <div className="mask">
-                    <img src="/mask-logo.svg" />
+                    <img src="/mask-logo.svg" alt="M4 Chip logo" />
                 </div>
             </div>
             <div className="content">
