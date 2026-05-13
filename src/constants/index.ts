@@ -120,6 +120,14 @@ const featureSequence = [
     { videoPath: '/videos/feature-5.mp4', boxClass: '.box5', delay: 0 },
 ];
 
+const VIDEO_PATHS = {
+    feature1: '/videos/feature-1.mp4',
+    feature2: '/videos/feature-2.mp4',
+    feature3: '/videos/feature-3.mp4',
+    feature4: '/videos/feature-4.mp4',
+    feature5: '/videos/feature-5.mp4',
+};
+
 const footerLinks = [
     { label: 'Privacy Policy', link: '#' },
     { label: 'Terms of Use', link: '#' },
@@ -136,4 +144,5 @@ export {
     noChangeParts,
     performanceImages,
     performanceImgPositions,
+    VIDEO_PATHS,
 };

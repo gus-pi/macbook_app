@@ -1,9 +1,9 @@
 import * as THREE from 'three';
-import { useGLTF } from '@react-three/drei';
+import { useGLTF, useVideoTexture } from '@react-three/drei';
 import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { useEffect, useMemo, type JSX } from 'react';
 import useMacBookStore from '../../store';
-import { noChangeParts } from '../../constants';
+import { noChangeParts, VIDEO_PATHS } from '../../constants';
 
 type GLTFAction = THREE.AnimationClip;
 
@@ -59,43 +59,27 @@ export default function Macbook(props: JSX.IntrinsicElements['group']) {
         'models/macbook-transformed.glb',
     ) as unknown as GLTFResult;
 
-    const videoElement = useMemo(() => {
-        const v = document.createElement('video');
-        v.src = texture;
-        v.muted = true;
-        v.loop = true;
-        v.playsInline = true;
-        v.crossOrigin = 'anonymous';
-        v.play();
-        return v;
-    }, []);
+    const t1 = useVideoTexture(VIDEO_PATHS.feature1);
+    const t2 = useVideoTexture(VIDEO_PATHS.feature2);
+    const t3 = useVideoTexture(VIDEO_PATHS.feature3);
+    const t4 = useVideoTexture(VIDEO_PATHS.feature4);
+    const t5 = useVideoTexture(VIDEO_PATHS.feature5);
 
-    const screen = useMemo(() => {
-        const screenTexture = new THREE.VideoTexture(videoElement);
-        screenTexture.colorSpace = THREE.SRGBColorSpace;
-        return screenTexture;
-    }, [videoElement]);
+    const textureMap: Record<string, THREE.VideoTexture> = {
+        [VIDEO_PATHS.feature1]: t1,
+        [VIDEO_PATHS.feature2]: t2,
+        [VIDEO_PATHS.feature3]: t3,
+        [VIDEO_PATHS.feature4]: t4,
+        [VIDEO_PATHS.feature5]: t5,
+    };
 
-    useEffect(() => {
-        videoElement.src = texture;
-        videoElement.load();
-        videoElement.play();
-    }, [texture, videoElement]);
-
-    useEffect(() => {
-        return () => {
-            videoElement.pause();
-            videoElement.src = '';
-            screen.dispose();
-        };
-    }, [videoElement, screen]);
+    // Pick the active texture based on store state
+    const activeTexture = textureMap[texture] || t1;
 
     useEffect(() => {
         scene.traverse((child) => {
-            if (child instanceof THREE.Mesh) {
-                if (!noChangeParts.includes(child.name)) {
-                    child.material.color = new THREE.Color(color);
-                }
+            if (child instanceof THREE.Mesh && !noChangeParts.includes(child.name)) {
+                child.material.color = new THREE.Color(color);
             }
         });
     }, [color, scene]);
@@ -188,7 +172,7 @@ export default function Macbook(props: JSX.IntrinsicElements['group']) {
                 rotation={[Math.PI / 2, 0, 0]}
             />
             <mesh geometry={nodes.Object_123.geometry} rotation={[Math.PI / 2, 0, 0]}>
-                <meshBasicMaterial map={screen} />
+                <meshBasicMaterial map={activeTexture} />
             </mesh>
             <mesh
                 geometry={nodes.Object_127.geometry}
