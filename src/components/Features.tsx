@@ -13,7 +13,7 @@ import gsap from 'gsap';
 
 const ModelScroll = () => {
     const groupRef = useRef<THREE.Group>(null);
-    const isMobile = useMediaQuery({ query: '(max-width: 1024px' });
+    const isMobile = useMediaQuery({ query: '(max-width: 1024px)' });
     const { setTexture } = useMacBookStore();
 
     //preload all feature videos during component mount

@@ -1,7 +1,7 @@
 import * as THREE from 'three';
-import { useGLTF, useVideoTexture } from '@react-three/drei';
+import { useGLTF } from '@react-three/drei';
 import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { useEffect, type JSX } from 'react';
+import { useEffect, useMemo, type JSX } from 'react';
 import useMacBookStore from '../../store';
 import { noChangeParts } from '../../constants';
 
@@ -59,7 +59,28 @@ export default function Macbook(props: JSX.IntrinsicElements['group']) {
         'models/macbook-transformed.glb',
     ) as unknown as GLTFResult;
 
-    const screen = useVideoTexture(texture);
+    const videoElement = useMemo(() => {
+        const v = document.createElement('video');
+        v.src = texture;
+        v.muted = true;
+        v.loop = true;
+        v.playsInline = true;
+        v.crossOrigin = 'anonymous';
+        v.play();
+        return v;
+    }, []);
+
+    const screen = useMemo(() => {
+        const screenTexture = new THREE.VideoTexture(videoElement);
+        screenTexture.colorSpace = THREE.SRGBColorSpace;
+        return screenTexture;
+    }, [videoElement]);
+
+    useEffect(() => {
+        videoElement.src = texture;
+        videoElement.load();
+        videoElement.play();
+    }, [texture, videoElement]);
 
     useEffect(() => {
         scene.traverse((child) => {
