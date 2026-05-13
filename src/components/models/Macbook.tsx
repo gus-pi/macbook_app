@@ -83,6 +83,14 @@ export default function Macbook(props: JSX.IntrinsicElements['group']) {
     }, [texture, videoElement]);
 
     useEffect(() => {
+        return () => {
+            videoElement.pause();
+            videoElement.src = '';
+            screen.dispose();
+        };
+    }, [videoElement, screen]);
+
+    useEffect(() => {
         scene.traverse((child) => {
             if (child instanceof THREE.Mesh) {
                 if (!noChangeParts.includes(child.name)) {
