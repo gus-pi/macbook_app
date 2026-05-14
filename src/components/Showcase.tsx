@@ -66,20 +66,25 @@ const Showcase = () => {
                                 hardware-accelerated ray tracing brings console-level graphics to
                                 your fingertips.
                             </p>
-                            <p className="text-primary">Learn more about Apple Intelligence</p>
+                            <a
+                                href="https://www.apple.com/apple-intelligence/"
+                                className="text-primary"
+                            >
+                                Learn more about Apple Intelligence.
+                            </a>
                         </div>
                     </div>
 
                     <div className="max-w-3xs space-y-14">
                         <div className="space-y-2">
                             <p>Up to</p>
-                            <h3>4x faster</h3>
-                            <p>pro rendering performance than M2</p>
+                            <h3>3.5x </h3>
+                            <p>the AI performance than M4</p>
                         </div>
                         <div className="space-y-2">
                             <p>Up to</p>
                             <h3>1.5x faster</h3>
-                            <p>CPU performance than M2</p>
+                            <p>faster graphics performance than M4 </p>
                         </div>
                     </div>
                 </div>

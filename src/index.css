@@ -148,7 +148,7 @@ body {
         }
 
         .controls {
-            @apply absolute z-50 bottom-40 lg:bottom-40 2xl:bottom-52 left-1/2 -translate-x-1/2;
+            @apply absolute z-[45] bottom-40 lg:bottom-40 2xl:bottom-52 left-1/2 -translate-x-1/2;
 
             .info {
                 @apply text-xs text-white bg-black/20 px-2 py-1 rounded-lg;
@@ -178,7 +178,27 @@ body {
         #canvas {
             @apply !w-full !h-[80vh] lg:!h-dvh relative z-40;
         }
+
+        .drag-hint {
+            @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[42] flex flex-col items-center gap-2 pointer-events-none;
+            transition: opacity 0.6s ease;
+
+            svg {
+                @apply text-white opacity-80;
+                animation: pulse-hint 1.8s ease-in-out infinite;
+            }
+
+            span {
+                @apply text-white text-sm tracking-wide opacity-80;
+            }
+
+            &.fade-out {
+                opacity: 0;
+            }
+        }
+
     }
+
 
     #showcase {
         @apply relative;
@@ -430,4 +450,9 @@ body {
             }
         }
     }
+}
+
+@keyframes pulse-hint {
+    0%, 100% { transform: scale(1);    opacity: 0.8; }
+    50%       { transform: scale(1.35); opacity: 0.4; }
 }

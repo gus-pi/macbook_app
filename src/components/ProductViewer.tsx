@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { useState } from 'react';
 import useMacBookStore from '../store';
 import { Canvas } from '@react-three/fiber';
 import StudioLights from './three/StudioLights';
@@ -7,11 +8,12 @@ import { useMediaQuery } from 'react-responsive';
 
 const ProductViewer = () => {
     const { color, scale, setColor, setScale } = useMacBookStore();
+    const [hintDismissed, setHintDismissed] = useState(false);
 
     const isMobile = useMediaQuery({ query: '(max-width: 1024px)' });
 
     return (
-        <section id="product-viewer">
+        <section id="product-viewer" onPointerDown={() => setHintDismissed(true)}>
             <h2>Take a closer look.</h2>
             <div className="controls">
                 <p className="info">
@@ -54,6 +56,13 @@ const ProductViewer = () => {
                     </div>
                 </div>
             </div>
+            <div className={clsx('drag-hint', hintDismissed && 'fade-out')}>
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <circle cx="12" cy="12" r="10" />
+                </svg>
+                <span>Drag to rotate</span>
+            </div>
+
             <Canvas id="canvas" camera={{ position: [0, 2, 5], fov: 50, near: 0.01, far: 100 }}>
                 <StudioLights />
 
