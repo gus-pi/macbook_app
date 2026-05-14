@@ -39,7 +39,7 @@ const Showcase = () => {
                     aria-label="No Mans Sky gameplay video"
                 />
                 <div className="mask">
-                    <img src="/mask-logo.svg" alt="M4 Chip logo" />
+                    <img src="/mask-logo.svg" alt="M5 Chip logo" />
                 </div>
             </div>
             <div className="content">
@@ -51,9 +51,9 @@ const Showcase = () => {
                             <p>
                                 Introducing{' '}
                                 <span className="text-white">
-                                    M4, the next generation of Apple silicon
+                                    M5, the next generation of Apple silicon
                                 </span>
-                                . M4 power
+                                . M5 power
                             </p>
                             <p>
                                 It drives Apple Intelligence on iPad Pro, so you can write, create,
