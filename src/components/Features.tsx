@@ -1,8 +1,8 @@
 import { Canvas } from '@react-three/fiber';
 import StudioLights from './three/StudioLights';
-import { features, featureSequence } from '../constants';
+import { features } from '../constants';
 import clsx from 'clsx';
-import { Suspense, useEffect, useRef } from 'react';
+import { Suspense, useRef } from 'react';
 import * as THREE from 'three';
 import { Html } from '@react-three/drei';
 import Macbook from './models/Macbook';

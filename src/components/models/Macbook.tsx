@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { useGLTF, useVideoTexture } from '@react-three/drei';
 import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { useEffect, useMemo, type JSX } from 'react';
+import { useEffect, type JSX } from 'react';
 import useMacBookStore from '../../store';
 import { noChangeParts, VIDEO_PATHS } from '../../constants';
 
